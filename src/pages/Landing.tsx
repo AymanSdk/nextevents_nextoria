@@ -1,5 +1,7 @@
 import logoGlyph from "@/assets/logo-glyph.png";
 import { Logo } from "@/components/Logo";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { cn } from "@/lib/utils";
 import {
   Accordion,
   AccordionContent,
@@ -538,7 +540,7 @@ const Landing = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setNavVisible(window.scrollY > 80);
+      setNavVisible(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -555,30 +557,72 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      {/* Navbar — hidden until scroll */}
-      <motion.nav
-        className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md"
-        initial={{ y: -100 }}
-        animate={{ y: navVisible ? 0 : -100 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      {/* Modern Floating Navbar */}
+      <motion.header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          navVisible ? "py-4" : "py-6",
+        )}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between h-[72px] px-6 lg:px-8">
-          <Link to="/">
-            <Logo size="md" />
-          </Link>
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" className="text-sm font-medium" asChild>
-              <Link to="/auth">Log in</Link>
-            </Button>
-            <Button
-              className="hidden sm:inline-flex text-sm font-semibold"
-              asChild
-            >
-              <Link to="/auth">Sign up</Link>
-            </Button>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div
+            className={cn(
+              "flex items-center justify-between transition-all duration-500",
+              navVisible
+                ? "bg-background/70 backdrop-blur-xl border border-border/50 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.1)] rounded-2xl px-4 md:px-6 py-3"
+                : "bg-transparent border-transparent px-2",
+            )}
+          >
+            <div className="flex items-center gap-8">
+              <Link
+                to="/"
+                className="flex flex-shrink-0 items-center group transition-opacity hover:opacity-80"
+              >
+                <Logo size="md" />
+              </Link>
+
+              {/* Desktop links */}
+              <nav className="hidden md:flex items-center gap-6">
+                {["Features", "Use Cases", "Pricing", "Resources"].map(
+                  (item) => (
+                    <a
+                      key={item}
+                      href="#"
+                      className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {item}
+                    </a>
+                  ),
+                )}
+              </nav>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <AnimatedThemeToggler
+                className={cn(
+                  "w-9 h-9 rounded-full flex items-center justify-center text-foreground transition-colors",
+                  navVisible
+                    ? "bg-muted/50 hover:bg-muted"
+                    : "bg-background/20 hover:bg-background/40 backdrop-blur-md border border-border/20",
+                )}
+              />
+              <Button
+                variant="ghost"
+                className="hidden sm:inline-flex text-sm font-medium rounded-full px-5 hover:bg-secondary/80"
+                asChild
+              >
+                <Link to="/auth">Log in</Link>
+              </Button>
+              <Button
+                className="text-sm font-semibold rounded-full px-6 shadow-sm shadow-primary/20 hover:shadow-primary/30 transition-all"
+                asChild
+              >
+                <Link to="/auth">Sign up</Link>
+              </Button>
+            </div>
           </div>
         </div>
-      </motion.nav>
+      </motion.header>
 
       {/* Hero */}
       <section className="relative overflow-hidden">
