@@ -14,13 +14,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
+  ArrowUpRight,
   BarChart2,
   Check,
-  Github,
-  Linkedin,
   Puzzle,
   Star,
-  Twitter,
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -625,19 +623,34 @@ const Landing = () => {
       </motion.header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
+      <section className="relative overflow-hidden w-full pt-32 pb-20 lg:pt-48 lg:pb-32">
+        {/* Modern radial gradient background */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background -z-10" />
+
+        {/* Subtle grid pattern */}
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] -z-10"
+          style={{
+            maskImage: "radial-gradient(circle, white, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(circle, white, transparent 80%)",
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="relative min-h-[580px] flex items-center justify-center">
             {/* Confetti shapes behind cards — dynamic */}
-            <ConfettiLayer
-              size={confettiSize}
-              opacity={confettiOpacity}
-              count={confettiCount}
-              spread={confettiSpread}
-            />
+            <div className="absolute inset-0 pointer-events-none -translate-y-20">
+              <ConfettiLayer
+                size={confettiSize}
+                opacity={confettiOpacity}
+                count={confettiCount}
+                spread={confettiSpread}
+              />
+            </div>
+
             {/* Top-left card */}
             <motion.div
-              className="hidden md:block absolute left-[-100px] lg:left-[-40px] top-[20px] w-[200px] lg:w-[260px]"
+              className="hidden lg:block absolute left-[-40px] top-[20px] w-[260px]"
               initial={{ opacity: 0, scale: 0.3, x: -80, y: -60 }}
               animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               transition={{
@@ -647,13 +660,16 @@ const Landing = () => {
                 delay: 0.2,
               }}
             >
-              <div className="rounded-2xl overflow-hidden shadow-lg rotate-[6deg]">
+              <div className="rounded-2xl overflow-hidden shadow-lg rotate-[6deg] bg-background border border-border/50">
                 <img
                   src={eventChill}
                   alt="Chill code workshop"
                   className="w-full h-[150px] object-cover"
                 />
-                <div className="bg-card px-3 py-2">
+                <div className="bg-card px-3 py-2 flex justify-between items-center">
+                  <h4 className="text-sm font-semibold truncate max-w-[120px]">
+                    Chill workshop
+                  </h4>
                   <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
                     Workshop
                   </span>
@@ -663,7 +679,7 @@ const Landing = () => {
 
             {/* Bottom-left card */}
             <motion.div
-              className="hidden md:block absolute left-[-120px] lg:left-[-60px] bottom-[20px] w-[200px] lg:w-[260px]"
+              className="hidden lg:block absolute left-[-60px] bottom-[20px] w-[260px]"
               initial={{ opacity: 0, scale: 0.3, x: -80, y: 60 }}
               animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               transition={{
@@ -673,13 +689,16 @@ const Landing = () => {
                 delay: 0.35,
               }}
             >
-              <div className="rounded-2xl overflow-hidden shadow-lg rotate-[-5deg]">
+              <div className="rounded-2xl overflow-hidden shadow-lg rotate-[-5deg] bg-background border border-border/50">
                 <img
                   src={eventJam}
                   alt="Late night jam"
                   className="w-full h-[150px] object-cover"
                 />
-                <div className="bg-card px-3 py-2">
+                <div className="bg-card px-3 py-2 flex justify-between items-center">
+                  <h4 className="text-sm font-semibold truncate max-w-[120px]">
+                    Late night jam
+                  </h4>
                   <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
                     Social
                   </span>
@@ -689,7 +708,7 @@ const Landing = () => {
 
             {/* Top-right card */}
             <motion.div
-              className="hidden md:block absolute right-[-100px] lg:right-[-40px] top-[20px] w-[200px] lg:w-[260px]"
+              className="hidden lg:block absolute right-[-40px] top-[20px] w-[260px]"
               initial={{ opacity: 0, scale: 0.3, x: 80, y: -60 }}
               animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               transition={{
@@ -699,13 +718,16 @@ const Landing = () => {
                 delay: 0.25,
               }}
             >
-              <div className="rounded-2xl overflow-hidden shadow-lg rotate-[-6deg]">
+              <div className="rounded-2xl overflow-hidden shadow-lg rotate-[-6deg] bg-background border border-border/50">
                 <img
                   src={eventStartup}
                   alt="Startup weekend"
                   className="w-full h-[150px] object-cover"
                 />
-                <div className="bg-card px-3 py-2">
+                <div className="bg-card px-3 py-2 flex justify-between items-center">
+                  <h4 className="text-sm font-semibold truncate max-w-[120px]">
+                    Startup weekend
+                  </h4>
                   <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
                     Hackathon
                   </span>
@@ -715,7 +737,7 @@ const Landing = () => {
 
             {/* Bottom-right card */}
             <motion.div
-              className="hidden md:block absolute right-[-120px] lg:right-[-60px] bottom-[20px] w-[200px] lg:w-[260px]"
+              className="hidden lg:block absolute right-[-60px] bottom-[20px] w-[260px]"
               initial={{ opacity: 0, scale: 0.3, x: 80, y: 60 }}
               animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               transition={{
@@ -725,13 +747,16 @@ const Landing = () => {
                 delay: 0.4,
               }}
             >
-              <div className="rounded-2xl overflow-hidden shadow-lg rotate-[5deg]">
+              <div className="rounded-2xl overflow-hidden shadow-lg rotate-[5deg] bg-background border border-border/50">
                 <img
                   src={eventSummit}
                   alt="Vibe coding summit"
                   className="w-full h-[150px] object-cover"
                 />
-                <div className="bg-card px-3 py-2">
+                <div className="bg-card px-3 py-2 flex justify-between items-center">
+                  <h4 className="text-sm font-semibold truncate max-w-[120px]">
+                    Vibe summit
+                  </h4>
                   <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
                     Conference
                   </span>
@@ -739,63 +764,152 @@ const Landing = () => {
               </div>
             </motion.div>
 
-            {/* Center — headline */}
-            <motion.div
-              className="text-center max-w-2xl mx-auto relative z-10"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              <div className="flex items-center justify-center mb-6">
-                <Logo size="lg" />
-              </div>
-              <h1
-                className="text-4xl sm:text-5xl lg:text-[44px] 2xl:text-[56px] font-display tracking-tight leading-[1.15] text-foreground mb-6"
-                style={{ fontWeight: titleWeight }}
-              >
-                The event platform
-                <br />
-                where ideas become{" "}
-                <span
-                  className="inline-block relative"
-                  style={{ minWidth: "7ch" }}
+            {/* Center block */}
+            <div className="relative z-10 text-center max-w-4xl">
+              <div className="flex flex-col items-center">
+                {/* Animated Announcement Badge */}
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="mb-8"
                 >
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={rotatingWords[wordIndex]}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -16 }}
-                      transition={{ duration: 0.35 }}
-                      className="text-foreground inline-block"
-                    >
-                      {rotatingWords[wordIndex]}
-                    </motion.span>
-                  </AnimatePresence>
-                  {/* Invisible longest word to reserve space */}
-                  <span
-                    className="invisible block h-0 overflow-hidden"
-                    aria-hidden="true"
+                  <a
+                    href="#"
+                    className="inline-flex items-center gap-3 p-1 pr-4 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium hover:bg-primary/10 transition-all group shadow-sm shadow-primary/5"
                   >
-                    communities.
+                    <span className="flex items-center rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-inner">
+                      ✨ New
+                    </span>
+                    <span className="text-foreground/90 group-hover:text-foreground transition-colors">
+                      Introducing the all-new Nextevents experience
+                    </span>
+                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                  </a>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center mb-8"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  <Logo size="lg" />
+                </motion.div>
+
+                <motion.h1
+                  className="text-5xl sm:text-6xl lg:text-[72px] font-display tracking-tight leading-[1.05] text-foreground mb-8 max-w-4xl mx-auto"
+                  style={{ fontWeight: titleWeight }}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                >
+                  The event platform
+                  <br className="hidden sm:block" />
+                  where ideas become{" "}
+                  <span
+                    className="inline-block relative text-primary"
+                    style={{ minWidth: "7ch" }}
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={rotatingWords[wordIndex]}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.4, ease: "anticipate" }}
+                        className="inline-block"
+                      >
+                        {rotatingWords[wordIndex]}
+                      </motion.span>
+                    </AnimatePresence>
+                    {/* Invisible longest word to reserve space */}
+                    <span
+                      className="invisible block h-0 overflow-hidden"
+                      aria-hidden="true"
+                    >
+                      communities.
+                    </span>
                   </span>
-                </span>
-              </h1>
-              <p className="text-lg text-muted-foreground max-w-lg mx-auto mb-8 leading-relaxed">
-                Whatever your event — from workshops to conferences — build
-                branded registration pages, track attendees, and grow your
-                community. No code required.
-              </p>
-              <Button
-                size="lg"
-                className="text-base font-semibold px-8 h-12"
-                asChild
-              >
-                <Link to="/auth">
-                  Get started <ArrowRight className="ml-2 w-4 h-4" />
-                </Link>
-              </Button>
-            </motion.div>
+                </motion.h1>
+
+                <motion.p
+                  className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.3 }}
+                >
+                  Whatever your event — from workshops to conferences — build
+                  branded registration pages, track attendees, and grow your
+                  community. No code required.
+                </motion.p>
+
+                <motion.div
+                  className="flex flex-col sm:flex-row items-center gap-4 justify-center w-full sm:w-auto"
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.4 }}
+                >
+                  <Button
+                    size="lg"
+                    className="relative text-base font-semibold rounded-full h-14 p-1.5 ps-8 pe-[4.5rem] group transition-all duration-500 hover:ps-[4.5rem] hover:pe-8 w-full sm:w-fit overflow-hidden cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 shadow-none border border-primary/10"
+                    asChild
+                  >
+                    <Link to="/auth">
+                      <span className="relative z-10 transition-all duration-500">
+                        Start for free
+                      </span>
+                      <div className="absolute right-1 top-1 bottom-1 w-12 h-12 bg-background text-primary rounded-full flex items-center justify-center transition-all duration-500 group-hover:right-[calc(100%-52px)] group-hover:rotate-45">
+                        <ArrowUpRight size={20} strokeWidth={2.5} />
+                      </div>
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="group relative text-base font-medium px-10 h-14 w-full sm:w-auto rounded-full border-2 border-border/40 bg-background/50 backdrop-blur-md shadow-sm hover:shadow-md hover:bg-muted/80 hover:border-border/80 transition-all duration-300 hover:-translate-y-1"
+                    asChild
+                  >
+                    <Link to="#features">
+                      <span className="flex items-center gap-2 text-foreground/80 group-hover:text-foreground transition-colors">
+                        View features
+                      </span>
+                    </Link>
+                  </Button>
+                </motion.div>
+
+                {/* Social Proof */}
+                <motion.div
+                  className="mt-14 flex flex-col items-center gap-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.6 }}
+                >
+                  <div className="flex -space-x-3">
+                    {AVATAR_URLS.slice(0, 5).map((url, i) => (
+                      <div
+                        key={i}
+                        className="w-10 h-10 rounded-full border-2 border-background overflow-hidden relative z-[1]"
+                      >
+                        <img
+                          src={url}
+                          alt="User avatar"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                    <div className="flex gap-1 text-yellow-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-current" />
+                      ))}
+                    </div>
+                    <span>Loved by 10,000+ event creators</span>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1889,15 +2003,15 @@ const Landing = () => {
               </p>
               <div className="flex items-center gap-4 text-muted-foreground">
                 <a href="#" className="hover:text-primary transition-colors">
-                  <Twitter className="w-5 h-5" />
-                  <span className="sr-only">Twitter</span>
+                  <X className="w-5 h-5" />
+                  <span className="sr-only">X</span>
                 </a>
                 <a href="#" className="hover:text-primary transition-colors">
-                  <Linkedin className="w-5 h-5" />
+                  <X className="w-5 h-5" />
                   <span className="sr-only">LinkedIn</span>
                 </a>
                 <a href="#" className="hover:text-primary transition-colors">
-                  <Github className="w-5 h-5" />
+                  <X className="w-5 h-5" />
                   <span className="sr-only">GitHub</span>
                 </a>
               </div>
